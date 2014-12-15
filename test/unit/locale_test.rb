@@ -38,30 +38,28 @@ class LocaleTest < ActiveSupport::TestCase
   end
 
   test "paginating phrases without translations" do
-    Tolk::Phrase.per_page = 2
     locale = tolk_locales(:se)
 
-    page1 = locale.phrases_without_translation
+    page1 = locale.phrases_without_translation.per(2)
     assert_equal [4, 3], page1.map(&:id)
 
-    page2 = locale.phrases_without_translation(2)
+    page2 = locale.phrases_without_translation(2).per(2)
     assert_equal [2, 6], page2.map(&:id)
 
-    page3 = locale.phrases_without_translation(3)
+    page3 = locale.phrases_without_translation(3).per(2)
     assert_equal [5], page3.map(&:id)
 
-    page4 = locale.phrases_without_translation(4)
+    page4 = locale.phrases_without_translation(4).per(2)
     assert page4.blank?
   end
 
   test "paginating phrases with translations" do
-    Tolk::Phrase.per_page = 5
     locale = tolk_locales(:en)
 
-    page1 = locale.phrases_with_translation
+    page1 = locale.phrases_with_translation.per(5)
     assert_equal [1, 3, 2, 6, 5], page1.map(&:id)
 
-    page2 = locale.phrases_with_translation(2)
+    page2 = locale.phrases_with_translation(2).per(5)
     assert page2.blank?
   end
 

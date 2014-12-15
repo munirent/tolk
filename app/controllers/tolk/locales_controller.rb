@@ -10,10 +10,10 @@ module Tolk
     def show
       respond_to do |format|
         format.html do
-          @phrases = @locale.phrases_without_translation(params[:page])
+          @phrases = @locale.phrases_without_translation(params[Kaminari.config.param_name])
         end
 
-        format.atom { @phrases = @locale.phrases_without_translation(params[:page], :per_page => 50) }
+        format.atom { @phrases = @locale.phrases_without_translation(params[Kaminari.config.param_name]).per(50) }
 
         format.yaml do
           data = @locale.to_hash
@@ -30,11 +30,11 @@ module Tolk
     end
 
     def all
-      @phrases = @locale.phrases_with_translation(params[:page])
+      @phrases = @locale.phrases_with_translation(params[Kaminari.config.param_name])
     end
 
     def updated
-      @phrases = @locale.phrases_with_updated_translation(params[:page])
+      @phrases = @locale.phrases_with_updated_translation(params[Kaminari.config.param_name])
       render :all
     end
 

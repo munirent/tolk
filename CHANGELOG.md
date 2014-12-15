@@ -1,3 +1,6 @@
+* Tolk 1.7.0 (unreleased)
+  * Switch from will_paginate to Kaminari (@dnrce)
+
 * Tolk 1.7.0
  * Rails 4.2 compatibility (@dnrce)
  * Fixed parameter handling in dump_yaml task (@grk)
